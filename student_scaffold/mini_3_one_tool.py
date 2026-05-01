@@ -31,7 +31,7 @@ class MiniStageAgent(StudentAgent):
         # It returns three values: tool_name, arguments, result.
         # You have the tool name and arguments inside `tool_call` — pass them through.
         # See ARCHITECTURE.md under "The Three Main Objects" for the call signature.
-        tool_name, arguments, result = None, None, None  # ← replace this line
+        tool_name, arguments, result = runtime.call_tool(tool_name=tool_call["name"], arguments=tool_call["arguments"], turn_index=0)  # ← replace this line
 
         # ── do not edit below this line ──────────────────────────────────────
         if tool_name is None:
