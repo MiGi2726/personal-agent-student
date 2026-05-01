@@ -21,7 +21,7 @@ class MiniStageAgent(StudentAgent):
         # Replace `memory = ...` with a runtime.write_memory() call.
         # See ARCHITECTURE.md under "The Memory API" for the call signature.
         # Think about what key, value, evidence, and confidence should be.
-        memory = ...  # <- replace this
+        memory = runtime.write_memory(key="preferred_time_window",value=preference,evidence=session.user_message,confidence=1.0)  # <- replace this
 
         # -- do not edit below this line --------------------------------------
         if memory is ...:
