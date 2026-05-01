@@ -37,7 +37,8 @@ class MiniStageAgent(StudentAgent):
         # Two things need to happen before the model can continue.
         # Think about what needs to change in `messages`, and what to call next.
         # Both helpers you need are already imported at the top of this file.
-        second_response = ...  # ← replace this (after updating messages)
+        messages.append(tool_result_message(tool_name, result))
+        second_response = runtime.complete(messages=[{"role": "system", "content": system_prompt}] + messages,require_json=True)# ← replace this (after updating messages)
 
         # ── do not edit below this line ──────────────────────────────────────
         if second_response is ...:
