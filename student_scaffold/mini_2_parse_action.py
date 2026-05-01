@@ -26,8 +26,7 @@ class MiniStageAgent(StudentAgent):
         # Replace `action = ...`. You have the model's response object.
         # parse_action() is already imported — figure out what to pass it.
         # The returned dict has 'tool_call' and 'final_response' keys.
-        action = ...  # ← replace this
-
+        action = parse_action(response.content)  # ← replace this
         # ── do not edit below this line ──────────────────────────────────────
         if action is ...:
             raise NotImplementedError("Replace `action = ...` above with your parse_action() call.")
