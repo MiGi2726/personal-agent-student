@@ -61,7 +61,7 @@ class MiniStageAgent(StudentAgent):
                     # -- YOUR TASK ---------------------------------------------
                     # Replace `preferred_slot = ...` with choose_preferred_slot(...).
                     # If preferred_slot is not None, set arguments["start_time"] to it.
-                    preferred_slot = ...  # <- replace this
+                    preferred_slot = choose_preferred_slot(last_available_slots, active_preference)  # <- replace this
                     if preferred_slot is ...:
                         raise NotImplementedError(
                             "Replace `preferred_slot = ...` with choose_preferred_slot(...)."
