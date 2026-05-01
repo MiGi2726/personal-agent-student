@@ -33,7 +33,7 @@ class MiniStageAgent(StudentAgent):
         # -- YOUR TASK ---------------------------------------------------------
         # Replace `chosen_slot = ...` with choose_preferred_slot(...).
         # Pass the valid slots list and the active memory preference.
-        chosen_slot = ...  # <- replace this
+        chosen_slot = choose_preferred_slot(available_slots, active_preference)  # <- replace this
 
         # -- do not edit below this line --------------------------------------
         if chosen_slot is ...:
