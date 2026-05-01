@@ -25,7 +25,7 @@ class MiniStageAgent(StudentAgent):
         # -- YOUR TASK ---------------------------------------------------------
         # Replace `memories = ...` with a runtime.search_memory() call.
         # Use the same key you wrote memory with in mini_1.
-        memories = ...  # <- replace this
+        memories = runtime.search_memory(key="preferred_time_window")  # <- replace this
 
         # -- do not edit below this line --------------------------------------
         if memories is ...:
