@@ -35,19 +35,43 @@ class BaselineStudentAgent(StudentAgent):
         for turn_index in range(runtime.max_model_turns):
             system_prompt = build_system_prompt(runtime)
 
-            # STEP 1 — Ask the model what to do next.  (mini-stage 1)
-            # TODO ↓
+            # STEP 1: call the model (same as mini_1)
+            response = runtime.complete(
+                messages=[{"role": "system", "content": system_prompt}] + messages,
+                require_json=True,
+            )
 
-            # STEP 2 — Record the response and parse the action.  (mini-stage 2)
-            # Append assistant_message(response) to messages, then parse.
-            # Wrap parse_action in try/except to handle malformed JSON.
-            # TODO ↓
+            # STEP 2: record the response and parse the action (same as mini_2)
+            messages.append(assistant_message(response))
+            try: 
+                action = parse_action(response.content)
+            except Exception:
+                invalid_response_count += 1
+                messages.append({"role": "user", "content": invalid_json_feedback()})
+                continue
 
-            # STEP 3 — If the model requested a tool, run it and loop back.  (mini-stages 3+4)
-            # TODO ↓
+            # STEP 3: if the model requested a tool, run it and send the result back (same as mini_3 + mini_4)
+            tool_call = action.get("tool_call")
+            if tool_call:
+                tool_name, _, result = runtime.call_tool(
+                    tool_name=tool_call.get("name"),
+                    arguments=tool_call.get("arguments", {}),
+                    turn_index=turn_index,
+                )
+                messages.append(tool_result_message(tool_name, result))
+                # After appending the result, `continue` sends the loop back to STEP 1.
+                # On the next iteration the model will see the tool result and ask for the next step.
+                # This is how multi-turn works — the loop replaces the manual second call in mini_4.
+                continue
 
-            # STEP 4 — If the model is done, store the answer and stop.  (mini-stage 5)
-            # TODO ↓
+            # STEP 4: if the model returned a final response, stop the loop.
+            # The model signals it is done by setting final_response to a non-empty string.
+            # Check action['final_response']. If it is non-empty, store it in `final_response` and break.
+            # TODO: replace the `pass` below with your termination condition (~2 lines).
+            if(action["final_response"]):  
+                final_response = action["final_response"]
+                break
+
 
         # Return the result to the benchmark.
         if not final_response and invalid_response_count > 0:
