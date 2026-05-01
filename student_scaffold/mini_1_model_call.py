@@ -20,7 +20,7 @@ class MiniStageAgent(StudentAgent):
         # Replace `response = ...` with a call to runtime.complete().
         # The model needs both the system prompt and the user message.
         # Look up the call signature in ARCHITECTURE.md under "The Three Main Objects".
-        response = ...  # ← replace this
+        response = runtime.complete(messages=[{"role": "system", "content": system_prompt}] + messages,require_json=True)  # ← replace this
 
         # ── do not edit below this line ──────────────────────────────────────
         if response is ...:
