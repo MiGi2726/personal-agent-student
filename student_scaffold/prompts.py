@@ -27,7 +27,18 @@ from __future__ import annotations
 #
 # The two rules below are a starting point. You are expected to improve them.
 
-EXTRA_RULES = [
+'''EXTRA_RULES = [
     "Use tools to inspect the referenced note or email thread before scheduling.",
     "Use tool results rather than guessing missing scheduling fields.",
+]'''
+
+EXTRA_RULES = [
+    "Use tools to get the provided note or email thread before scheduling.",
+    "Use tool to create an event before final response."
+    "Use tool results rather than guessing missing scheduling fields.",
 ]
+
+'''EXTRA_RULES = [
+    "Must Use tools to get the referenced note or email thread before scheduling.",
+    "Must Use tool results rather than guessing missing scheduling fields.",
+]'''
