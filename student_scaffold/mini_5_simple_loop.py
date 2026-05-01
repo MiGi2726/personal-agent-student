@@ -58,7 +58,9 @@ class MiniStageAgent(StudentAgent):
             # The model signals it is done by setting final_response to a non-empty string.
             # Check action['final_response']. If it is non-empty, store it in `final_response` and break.
             # TODO: replace the `pass` below with your termination condition (~2 lines).
-            pass  # ← your code goes here
+            if(action["final_response"]):  
+                final_response = action["final_response"]
+                break  # ← your code goes here
 
         # Return the result. If the loop ended without a final response, use a fallback.
         return runtime.finish(final_response or runtime.default_final_response() or "Could not complete the task.")
